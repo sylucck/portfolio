@@ -7,6 +7,7 @@ from .models import *
 class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'body', 'cover' )
     fields = ('title', 'body', 'cover', 'categories')
+    #prepopulated_fields = {'slug': ('title',)} 
 
 class CategoryAdmin(admin.ModelAdmin):
     pass

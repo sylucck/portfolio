@@ -4,21 +4,21 @@ from django import forms
 
 class CommentForm(forms.Form):
     author = forms.CharField(
-        max_length=60,
+        max_length=40,
         widget=forms.TextInput(attrs={
-            'rows': '2',
+            'rows': '4',
             "class": "form-control",
             "placeholder": "Your Name"
         })
     )
     body = forms.CharField(widget=forms.Textarea(
         attrs={
-            "rows": "2",
+            "rows": "10",
             "class": "form-control",
             "placeholder": "Leave a comment!"
         })
     )
 
 class SearchForm(forms.Form):
-    title = forms.CharField(max_length=20)
+    title_search = forms.CharField(max_length=20)
 

@@ -17,47 +17,46 @@
 
     .thumbnail{
 	width: 100%;
-	height: 200px;
+	height: 441px;
 	-webkit-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     -moz-box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
     box-shadow: -1px -3px 5px -2px rgba(214,214,214,1);
    }
 </style>
 
-<header class="masthead">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row">
-            <div class=" col-md-8 col-md-10 mx-auto">
-                <div class="site-heading">
-                    <h3 class=" site-heading my-4 mt-3 text-white"> Welcome to my awesome Blog </h3>
-                    <p class="text-light">We Love Django As much as you do..! &nbsp
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+
 <div class="container">
+    
     <div class="row">
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-3 left">
             {% for post in posts %}
-            <img class="thumbnail" src="{{ post.coverURL }}">
-            <h2><a href="{% url 'blog_details' post.pk %}">{{ post.title }}</a></h2>
-            <small>
-                {{ post.created_on.date }} |&nbsp;
-                Categories:&nbsp;
-                {% for category in post.categories.all %}
-                <a href="{% url 'blog_category' category.name %}">
-                    {{ category.name }}
-                </a>&nbsp;
-                {% endfor %}
-            </small>
-            <p>{{ post.body | slice:":200" }}...</p>
+            <div class="card mb-4">
+                <img class="thumbnail" src="{{ post.coverURL }}">
+                <h2 class="card-title">{{ post.title }}</h2>
+                <small>
+                    {{ post.created_on.date }} |&nbsp;
+                    Categories:&nbsp;
+                    {% for category in post.categories.all %}
+                    <a href="{% url 'blog_category' category.name %}">
+                        {{ category.name }}
+                    </a>&nbsp;
+                    {% endfor %}
+                </small>
+                <p>{{ post.body | slice:":200" }}...</p>
+                <a href="{% url 'blog_details' post.pk  %}" class="btn btn-primary">Read More &rarr;</a>
+            </div>   
             {% endfor %}
         </div>
-        <!--{% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}-->
+        <hr>
+        {% block sidebar %} {% include 'sidebar.html' %} {% endblock sidebar %}
+       
+    </div>
+    <div class="row ">
+        <div class="col-md-8 mt-3 right">
+            <p>You have visited this page {{ num_visits }} time{{ num_visits|pluralize }}.</p>
+        </div>
     </div>
 </div>
+
 {% endblock page_content %}

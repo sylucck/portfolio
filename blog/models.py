@@ -1,5 +1,6 @@
 from django.db import models
 from django.db.models.deletion import SET_NULL
+from django.template.defaultfilters import slugify
 
 
 class Category(models.Model):
@@ -16,6 +17,7 @@ class Post(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
     cover = models.ImageField(null=True, blank=True )
+    #slug = models.SlugField(max_length=200, null= True, blank=  True, unique=True)
     #status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
@@ -29,6 +31,11 @@ class Post(models.Model):
         except:
             url = ''
         return url
+
+    #def save(self, *args, **kwargs): # new
+     #   if not self.slug:
+      #      self.slug = slugify(self.title)
+       # return super().save(*args, **kwargs)
 
 class Comment(models.Model):
     author = models.CharField(max_length=60)
