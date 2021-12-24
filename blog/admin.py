@@ -1,11 +1,12 @@
 from django.contrib import admin
 
+from .models import *
+
 # Register your models here.
-from myblog.models import Post, Category, Comment
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('title', 'body', 'created_on', 'last_modified', 'cover')
-    fields = ['title', ('body', 'cover')]
+    list_display = ('title', 'body', 'cover' )
+    fields = ('title', 'body', 'cover', 'categories')
 
 class CategoryAdmin(admin.ModelAdmin):
     pass

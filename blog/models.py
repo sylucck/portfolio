@@ -1,9 +1,6 @@
 from django.db import models
+from django.db.models.deletion import SET_NULL
 
-# Create your models here.
-#class Image(models.Model):
-   # title = models.CharField(max_length=200, default=None, blank=False, null=False)
-    #image_cov = models.ImageField(null=True, blank=True )
 
 class Category(models.Model):
     name = models.CharField(max_length=20)
@@ -18,12 +15,20 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
-    cover = models.ImageField(null=True, blank=True)
+    cover = models.ImageField(null=True, blank=True )
     #status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
         """String for representing a model object"""
         return self.title
+
+    @property
+    def coverURL(self):
+        try:
+            url = self.cover.url
+        except:
+            url = ''
+        return url
 
 class Comment(models.Model):
     author = models.CharField(max_length=60)
