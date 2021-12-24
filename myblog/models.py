@@ -1,6 +1,10 @@
 from django.db import models
 
 # Create your models here.
+#class Image(models.Model):
+   # title = models.CharField(max_length=200, default=None, blank=False, null=False)
+    #image_cov = models.ImageField(null=True, blank=True )
+
 class Category(models.Model):
     name = models.CharField(max_length=20)
 
@@ -14,7 +18,8 @@ class Post(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
     categories = models.ManyToManyField('Category', related_name='posts')
-    cover = models.ImageField(upload_to='myblog/pictures', default=None, null=True, blank=True)
+    cover = models.ImageField(null=True, blank=True)
+    #status = models.IntegerField(choices=STATUS, default=0)
 
     def __str__(self):
         """String for representing a model object"""
