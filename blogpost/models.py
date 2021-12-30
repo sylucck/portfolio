@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.deletion import SET_NULL
 from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 
 class Category(models.Model):
@@ -10,15 +11,21 @@ class Category(models.Model):
         """String for representing a model object"""
         return self.name
 
+STATUS = (
+    (0,"Draft"),
+    (1,"Publish")
+)
+
 class Post(models.Model):
-    title = models.CharField(max_length=255)
-    body = models.TextField()
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    updated_on = models.DateTimeField(auto_now=True)
+    content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now=True)
-    categories = models.ManyToManyField('Category', related_name='posts')
+    status = models.IntegerField(choices=STATUS, default=0)
     cover = models.ImageField(null=True, blank=True )
-    #slug = models.SlugField(max_length=200, null= True, blank=  True, unique=True)
-    #status = models.IntegerField(choices=STATUS, default=0)
+
 
     def __str__(self):
         """String for representing a model object"""

@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+from django.views import generic
 from .models import *
-from .forms import CommentForm, SearchForm
+from .forms import *
+
 
 # Create your views here.
-
 
 def home(request):
     return render(request, 'home.html')
 
 def blog_index(request):
     posts = Post.objects.all().order_by('-created_on')
-    num_visits = request.session.get('num_visits', 1)
-    request.session['num_visits'] = num_visits + 1
+    
     #if request.method == 'POST':
      #   form = SearchForm(request.POST)
       #  if form.is_valid():
@@ -22,14 +22,15 @@ def blog_index(request):
      #   form = SearchForm()
     context = {
         "posts": posts,
-        'num_visits': num_visits,
+        
         #'form': form
         }
     return render(request, 'blog/blog_index.html', context)
 
 
-def blog_details(request, pk):
-    post = Post.objects.get(pk=pk)
+
+def blog_details(request, slug):
+    post = Post.objects.get(slug = slug)
     comments = Comment.objects.filter(post=post)
     
 

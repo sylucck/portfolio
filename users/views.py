@@ -2,15 +2,26 @@ from django.shortcuts import render, redirect
 #from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from .forms import UserRegistrationForm
+from django.contrib.auth import login
+from ecommerce.models import *
 
 def register(request):
     if request.method == "POST":
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
-            form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Account created for {username}')
-            return redirect('store')
+            user = form.save()
+            user.save()
+
+            customer = Customer()
+            customer.user = user
+            customer.save()
+            #raw_password = form.cleaned_data.get('password1')
+            #user = authenticate(username=username, password=raw_password)
+            #Customer.objects.create(user=user, name=username, email= email) 
+            messages.success(request, f'{username}, your account has been created! You are able to log in')
+            login(request, user)
+            return redirect('login')
     else:
         form = UserRegistrationForm()
     return render(request, 'users/register.html', {'form':form})
