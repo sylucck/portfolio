@@ -153,3 +153,4 @@ X_FRAME_OPTIONS = 'SAMEORIGIN'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 LOGIN_REDIRECT_URL = 'home' #redirecting to store page after a successful login session configuration.
+LOGIN_URL = 'login'

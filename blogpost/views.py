@@ -30,7 +30,7 @@ def blog_index(request):
 
 
 def blog_details(request, slug):
-    post = Post.objects.get(slug = slug)
+    post = Post.objects.get(slug=slug)
     comments = Comment.objects.filter(post=post)
     
 
