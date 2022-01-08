@@ -35,7 +35,6 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django_filters',
-    'calories',
     'users',
     'blogpost',
     'django_summernote',

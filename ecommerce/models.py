@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from users.models import *
 # Create your models here.
 
 class Customer(models.Model):
@@ -11,7 +11,6 @@ class Customer(models.Model):
 	def __str__(self):
 		"""String for representing a model object"""
 		return str(self.name)
-
 
 
     

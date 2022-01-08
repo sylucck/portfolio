@@ -27,7 +27,6 @@ urlpatterns = [
     path('', include('ecommerce.urls')),
     path('', include('blogpost.urls')),
     #path('', include('chat.urls')),
-    path('', include('calories.urls')),
     path('summernote/', include('django_summernote.urls')),
     path('profile/', user_views.profile, name="profile"),
     path('register/', user_views.register, name="register"),
