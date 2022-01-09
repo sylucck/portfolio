@@ -15,9 +15,9 @@ def register(request):
             user = form.save()
             user.save()
 
-            customer = Customer()
-            customer.user = user
-            customer.save()
+            #customer = Customer()
+            #customer.user = user
+            #customer.save()
             #raw_password = form.cleaned_data.get('password1')
             #user = authenticate(username=username, password=raw_password)
             #Customer.objects.create(user=user, name=username, email= email) 
